@@ -1,0 +1,51 @@
+{
+        "openapi" : "3.0.0",
+        "info" : {
+            "title" : "APII"
+        },
+        "servers" : [
+            {
+                "url" : "http://localhost:3000",
+                "description" : "development server"
+            }
+        ],
+        "tags" : [
+            {
+                "name" : "Movies",
+                "description" : "movies "
+            },
+            {
+                "name" : "Users",
+                "description" : "user "
+            }
+        ],
+        "paths" : {
+            "/movies" : {
+                "get" : {
+                    "tags" : [
+                        "Movies"
+                    ],
+                    "summary" : "Its get all movies ",
+                    "response" : {
+                        "200" : {
+                            "description" : "sukses",
+                            "concat" : {
+                                "application/json" :{
+                                    "schema" : {
+                                        "type" : "object",
+                                        "properties" : {
+                                            "email" : {
+                                                "type" : "sring",
+                                                "example" : "lorem@gmail.com"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }  
+ 
+}

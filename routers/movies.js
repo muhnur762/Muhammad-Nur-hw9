@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const jwt = require('jsonwebtoken');
-
 var pool = require('../koneksi.js');
+var jwt= require('jsonwebtoken');
+const secretKey = '123456789'
 
 
-const secretKey = '1234567'
+
 
 // menampilakn seluruh movies
 router.get('/', function(req,res) {
@@ -90,15 +90,46 @@ router.delete('/:id', function(req,res) {
     );
 });
 
+router.post('/login',(req,res)=>{
+    const {email} = req.body
+    const token = jwt.sign({email}, secretKey )
 
-router.post('/login',(req,res) => {
-const {email} = req.body
-const token = jwt.sign({email}, secretKey)
+    return res.status(200).json({
+        token
+    })
+});
 
-return res.status(200).json({
-    token
-})
-})
+// function authenticate(req,res,next){
+//     const token = req.headers?.authorization?.split(' ')[1]
+
+//     if(!token){
+//         return res.status(401).json({
+//             message: 'Unauthenticate'
+//         })
+//     }
+
+//     jwt.verify(token, secretKey, (err, decode) => {
+//         if(err){
+//             return res.status(401).json({
+//                 message: 'Unauthenticate'
+//             })
+//         }
+//         req.headers.user = decode
+//         next()
+//     })
+// }
+
+// function logerMidelware(req, res, next) {
+//     console.log('ini midelware');
+//     console.log(req.body, '<<< ini body')
+
+//     if(!req.body.email){
+//         return res.status(400).json({
+//             message : 'Email Required'
+//         })
+//     }
+//     next()
+// }
 
 
 
